@@ -135,9 +135,21 @@ var palindrome = function(string) {
 // modulo (%) operator.
 // modulo(5,2) // 1
 // modulo(17,5) // 2
-// modulo(22,6) // 4
+// modulo(22,6) // 4-1
 var modulo = function(x, y) {
+  if (abs(x) < abs(y)) {
+    return x;
+  }
+  if (x < 0 && abs(x) >= abs(y)) {
+    return modulo(-(abs(x)-abs(y)), y);
+  } else if (x > 0 && abs(x) >= abs(y)) {
+    return modulo(abs(x)-abs(y), y);
+  }
 };
+
+var abs = function(n) {
+  return (n > 0)? n: -n;
+}
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
