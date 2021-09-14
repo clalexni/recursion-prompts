@@ -92,7 +92,8 @@ var exponent = function(base, exp) {
   if (exp > 0) {
     return base * exponent(base, exp-1);
   } else if (exp < 0) {
-    return exponent(base, exp+1) / base;
+    //return (1/base) * exponent(base, exp+1);
+    return exponent(base, exp+1)/base;
   }
 };
 
@@ -101,14 +102,33 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  if (n < 1) {
+    return false;
+  } else if (n === 1) { 
+    return true;
+  }
+  return powerOfTwo(n/2);
 };
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
+  var result = '';
+  if(string.length === 1) {
+    return string;
+  }
+  result = string[string.length-1] + reverse(string.substring(0, string.length - 1));
+  return result;
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  string = string.split(' ').join().toUpperCase();
+  if (string.length === 1 || string.length === 0) {
+    return true;
+  } else if (string[0] !== string[string.length-1]) {
+    return false;
+  }
+  return palindrome(string.substring(1, string.length-1));
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
